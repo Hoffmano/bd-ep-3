@@ -21,5 +21,12 @@ public class createPublication {
                 form.frame.setVisible(true);
             }
         });
+        BOOKButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                form.frame.setContentPane(new book().panel);
+                form.frame.setVisible(true);
+            }
+        });
     }
 }
