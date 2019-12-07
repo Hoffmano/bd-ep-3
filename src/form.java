@@ -3,45 +3,85 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class form {
-    private JButton CREATEButton;
-    private JButton READButton;
-    private JButton UPDATEButton;
-    private JButton DELETEButton;
-    private JPanel panel;
-    private static JFrame frame;
+    private JButton createPublictionButton;
+    private JButton readPublicationButton;
+    private JButton updatePublictionButton;
+    private JButton deletePublicationButton;
+    public JPanel panel;
+    private JButton createLoanButton;
+    private JButton readLoanButton;
+    private JButton updateLoanButton;
+    private JButton deleteLoanButton;
+    public static JFrame frame;
 
     public form() {
-        actionListener(CREATEButton, "button create clicked");
-
-        actionListener(READButton, "button read clicked");
-
-        actionListener(UPDATEButton, "button update clicked");
-
-        actionListener(DELETEButton, "button delete clicked");
-    }
-
-    private void actionListener(JButton createButton, String s) {
-        createButton.addActionListener(new ActionListener() {
+        createLoanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(s);
+
+            }
+        });
+        readLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        updateLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        deleteLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        createPublictionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setContentPane(new createPublication().panel);
+                frame.setVisible(true);
+            }
+        });
+        readPublicationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        updatePublictionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        deletePublicationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
 
+
     public static void main(String[] args) {
         createFrame();
-        configureFrame();
+        configureMainFrame();
     }
 
     private static void createFrame() {
-        frame = new JFrame("Form");
+        frame = new JFrame("main");
     }
 
-    private static void configureFrame() {
+    private static void configureMainFrame() {
         frame.setContentPane(new form().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
     }
 }
