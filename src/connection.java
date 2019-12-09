@@ -6,9 +6,9 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class connection {
-    String url = "jdbc:mysql://localhost:3306/bd_orcamento_domestico";
-    String usuario = "root";
-    String senha = "vertrigo";
+    String url = "jdbc:mysql://localhost:3306/bd_biblioteca"; //Só vai funcionar depois de colocar o BD no servidor local
+    String usuario = "root"; //Não sei como fica no Postgre, alguém tem que testar essa conexão. Acredito que seja root e root, ou admin e admin, ou root admin, ou admin root, ou apenas root ou apenas admin. Geralmente alguma dessas opções funcionam.
+    String senha = "vertrigo"; //O mesmo da linha de cima
 
 
     private final Statement stm = null;
@@ -31,7 +31,7 @@ public class connection {
             JOptionPane.showMessageDialog(null, "Registro processado");
         }
         catch (SQLException sqlex){
-            System.out.println("Erro de acesso ao Banco de Dados " + sqlex);
+            System.out.println("Erro ao acessar o banco de dados: " + sqlex);
             JOptionPane.showMessageDialog(null, "Erro.");
         }
         return qtreg;
