@@ -1,37 +1,40 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.sql.*;
 
 public class connection {
-    String url = "jdbc:mysql://localhost:3306/bd_orcamento_domestico";
-    String usuario = "root";
-    String senha = "vertrigo";
-
-
-    private final Statement stm = null;
-    private Connection conexao = null;
+    public static Connection connection;
     public static Statement statement = null;
 
-    public void conectar() throws ClassNotFoundException, SQLException{
-        Class.forName("com.mysql.jdbc.Driver");
-        conexao = DriverManager.getConnection(url, usuario, senha);
-        statement = conexao.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-    }
-    public void desconectar() throws SQLException{
-        conexao.close();
+    public static Connection connect() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ep bd?useTimezone=true&serverTimezone=UTC&useSSL=false", "root", "vertrigo");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            System.out.println("Não foi possível encontrar o Driver!");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Não foi possível conectar ao banco!");
+        }
+        return connection;
     }
 
-    public static int RunSQL(String sql){
-        int qtreg = 0;
-        try{
-            qtreg = statement.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "Registro processado");
+    public void disconnect() {
+        try {
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        catch (SQLException sqlex){
-            System.out.println("Erro de acesso ao Banco de Dados " + sqlex);
+    }
+
+    public static int runQuerie(String sql) {
+        int qtreg = 0;
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            JOptionPane.showMessageDialog(null, "Registro processado");
+        } catch (SQLException sqlex) {
+            System.out.println("Erro ao acessar o banco de dados: " + sqlex);
             JOptionPane.showMessageDialog(null, "Erro.");
         }
         return qtreg;
